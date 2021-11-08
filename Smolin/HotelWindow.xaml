@@ -1,0 +1,39 @@
+﻿<Window KeyDown="Window_KeyDown" x:Class="Smolin.HotelWindow"
+xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+xmlns:mc="http://schemas.openxmlformats.org/markupcompatibility/2006"
+xmlns:local="clr-namespace:Smolin"
+Title="Таблица отелей" Height="600" Width="1000" Background="#bae3e8">
+    
+    <Window.Resources>
+        <Style TargetType="Button" x:Key="PaginationButton">
+            <Setter Property="Background" Value="White"/> 
+            <Setter Property="Foreground" Value="#FF6995C2"/> 
+            <Setter Property="FontSize" Value="14"/> 
+            <Setter Property="FontFamily" Value="Calibri"/>
+            <Setter Property="BorderBrush" Value="White"/>
+            <Setter Property="Height" Value="20"/>
+        </Style>
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="3.0*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>        <DataGrid Grid.Row="0" x:Name="DataGridHotels" AutoGenerateColumns="False" IsReadOnly="True" ColumnWidth="*" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">            <DataGrid.Columns>
+                <DataGridTextColumn Header="Название отеля" Binding="{Binding Name}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Количество звезд" Binding="{Binding CountOfStars}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Страна" Binding="{Binding Country.Name}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Количество имеющихся туров" Binding="{Binding NumberOfToursAvailable}"></DataGridTextColumn>
+                <DataGridTemplateColumn Header="Изменить">                    <DataGridTemplateColumn.CellTemplate>                        <DataTemplate>
+                            <Button x:Name="BtnEditHotelInfo" Content="Изменить" Click="BtnEditHotelInfo_Click"></Button>                                                    </DataTemplate>                        
+                                                                        </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>            </DataGrid.Columns>
+        </DataGrid>
+        <WrapPanel Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center">            <StackPanel x:Name="PaginationPanel" Orientation="Horizontal" Margin="40 0 0 0">                <Button x:Name="GoFirstPageButton" Style="{StaticResource PaginationButton}" Content="&lt;&lt;" Click="GoFirstPageButton_Click" FontSize="20" Width="40" Height="40"></Button>                <Button x:Name="GoPrevPageButton" Style="{StaticResource PaginationButton}" Content="&lt;" Click="GoPrevPageButton_Click" FontSize="20" Width="40" Height="40"></Button>
+                <TextBox x:Name="TxtCurrentPageNumber"
+TextChanged="TxtCurrentPageNumber_TextChanged" Width="40" Height="40" VerticalAlignment="Center" HorizontalAlignment="Center" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" RenderTransformOrigin="0.94,0.518"/>                <Label x:Name="LblTotalPages" FontSize="10" VerticalAlignment="Center" HorizontalAlignment="Center"></Label>                <Button x:Name="GoNextPageButton" Style="{StaticResource PaginationButton}" Content="&gt;" Click="GoNextPageButton_Click" FontSize="20" Width="40" Height="40"></Button>                <Button x:Name="GoLastPageButton" Style="{StaticResource PaginationButton}" Content="&gt;&gt;" Click="GoLastPageButton_Click" FontSize="20" Width="40" Height="40"></Button>            </StackPanel>
+            <TextBlock x:Name="TxtCountRecords" Text="Количество записей: " VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>            <TextBlock x:Name="TxtCountRecordsInCurrentPage" Text="Количество записей в текущей странице: " VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>            <Button x:Name="BtnAddHotel" Content="Добавить отель"
+Click="BtnAddHotel_Click"/>
+        </WrapPanel>    </Grid>
+</Window>
